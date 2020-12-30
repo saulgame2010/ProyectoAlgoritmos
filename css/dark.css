@@ -1,0 +1,48 @@
+body{
+	background: #001B48;
+	background-attachment: fixed;
+	transition: 3000ms;
+}
+#global {
+	background-color: #02457A;
+	transition: 2000ms;
+}
+#logo{	
+	background: #001B48;	
+	transition: 700ms;
+}
+#menu {
+	background-color: #001B48;
+	transition: 700ms;
+}
+#menu ul li:hover{
+	background: #02457A;
+	transition: 700ms;
+}
+.button-more{	
+	background: #D6E8EE;
+	color: black;
+	transition: 700ms;
+}
+#posts{
+	font-family: "Quicksand";	
+	color: white;
+	transition: 700ms;
+}
+.post{
+	color: white;
+	transition: 700ms;
+}
+.post h2{
+	color: #333;
+	color: white;
+	transition: 700ms;
+}
+.post .date{
+	color: white;
+	transition: 700ms;
+}
+.post p{
+	color: white;
+	transition: 700ms;
+}

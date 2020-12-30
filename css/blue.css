@@ -1,0 +1,27 @@
+body{
+	background: url('../img/cielo.jpg');
+	background-attachment: fixed;
+	transition: 700ms;
+}
+#logo{	
+	background: #97CADB;
+	color: black;	
+	transition: 700ms;
+}
+#menu {
+	background-color: #97CADB;
+	color: black;
+	transition: 700ms;
+}
+#menu ul li:hover{
+	background: #D6E8EE;
+	color: black;
+	transition: 700ms;
+}
+#menu a{
+	color: black;
+}
+.button-more{	
+	background: #1F87C4;
+	transition: 700ms;
+}
