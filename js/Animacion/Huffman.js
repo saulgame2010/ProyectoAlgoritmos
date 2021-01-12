@@ -57,15 +57,15 @@ Huffman.prototype.init = function(am, w, h) {
 Huffman.prototype.addControls = function() {
     this.controls = [];
 
-    this.btnReset = addControlToAlgorithmBar("Button", "Reset");
+    this.btnReset = addControlToAlgorithmBar("Button", "Reiniciar animación");
     this.btnReset.onclick = this.reset.bind(this);
     this.controls.push(this.btnReset);
 
-    this.btnBuild = addControlToAlgorithmBar("Button", "Build tree");
+    this.btnBuild = addControlToAlgorithmBar("Button", "Dibujar árbol");
     this.btnBuild.onclick = this.buildWrapper.bind(this);
     this.controls.push(this.btnBuild);
 
-    this.lblText = addLabelToAlgorithmBar("Text:");
+    this.lblText = addLabelToAlgorithmBar("Ingresa el texto que desea codificar:");
     this.txtText = addControlToAlgorithmBar("Text", "");
     this.controls.push(this.txtText);
 }
@@ -97,7 +97,7 @@ Huffman.prototype.reset = function() {
 
     this.statusId = this.newId();
     this.cmd(
-        "CreateLabel", this.statusId, "Ready.", Huffman.STATUS_LABEL_X, Huffman.STATUS_LABEL_Y, 0);
+        "CreateLabel", this.statusId, "Estado actual: Esperando texto...", Huffman.STATUS_LABEL_X, Huffman.STATUS_LABEL_Y, 0);
 
     // Calculate the frequencies of the characters in the input.
     freqs = {};
@@ -159,7 +159,7 @@ Huffman.prototype.newParentNode = function(child1, child2, rootIndex) {
     };
 
     if (child1.parent !== undefined || child2.parent !== undefined) {
-        throw new Error("newParentNode: Child already has a parent.");
+        throw new Error("newParentNode: El nodo hijo ya tiene un padre.");
     }
     child1.parent = node;
     child2.parent = node;
@@ -257,7 +257,7 @@ Huffman.prototype.realizePositions = function(node) {
 Huffman.prototype.union = function(node1, node2) {
     var i, nodeTmp, newRoot;
     if (node1.rootIndex === undefined || node2.rootIndex === undefined) {
-        throw new Error("union: Both nodes must have root node indices.");
+        throw new Error("union: Ambos nodos deben tener índices de nodo raíz.");
     }
 
     // For visual consistency, always merge the right node into the left.
@@ -299,7 +299,7 @@ Huffman.prototype.build = function(text) {
     this.cmd("Step");
 
     while (this.pq.size() > 1) {
-        this.setStatus("Removing two minimum elements from the priority queue.");
+        this.setStatus("Estado actual: Eliminando dos elementos mínimos de la cola de prioridad.");
         this.cmd("Step");
         child1 = this.pq.removeMin();
         child2 = this.pq.removeMin();
@@ -309,7 +309,7 @@ Huffman.prototype.build = function(text) {
         this.cmd("SetHighlight", child2.id, 1);
         this.cmd("Step");
 
-        this.setStatus("Merging the two trees.");
+        this.setStatus("Estado actual: Fusionando los dos sub árboles.");
         this.cmd("Step");
         this.cmd("SetHighlight", child1.id, 0);
         this.cmd("SetHighlight", child2.id, 0);
@@ -317,7 +317,7 @@ Huffman.prototype.build = function(text) {
         this.cmd("SetHighlight", node.id, 1);
         this.cmd("Step");
 
-        this.setStatus("Reinserting the new root node in the priority queue.");
+        this.setStatus("Estado actual: Reinsertando el nuevo nodo raíz en la cola de prioridad.");
         this.cmd("Step");
         this.pq.insert(node);
         this.setNodeInPQ(node, true);
@@ -330,7 +330,7 @@ Huffman.prototype.build = function(text) {
     node = this.pq.removeMin();
     this.setNodeInPQ(node, false);
 
-    this.setStatus("");
+    this.setStatus("Estado actual: Se ha terminado la codificación");
     return this.commands;
 }
 

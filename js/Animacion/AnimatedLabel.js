@@ -32,7 +32,7 @@ function AnimatedLabel(id, val, center, initialWidth)
 	this.objectID = id;
 	this.alpha = 1.0;
 	this.addedToScene = true;
-	this.labelColor = "#000000";
+	this.labelColor = "#FF2C09";
 	this.textWidth = 0;
 	if (initialWidth != undefined)
 	{
@@ -64,7 +64,7 @@ AnimatedLabel.prototype.draw = function(ctx)
 
 	
 	
-	ctx.font = '10px sans-serif';
+	ctx.font = '20px Comic Sans MS';
 	if (this.centering)
 	{
 		ctx.textAlign = 'center';
