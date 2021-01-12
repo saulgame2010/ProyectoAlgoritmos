@@ -187,3 +187,6 @@ footer{
 	width: 70%;
 	margin: 0px auto;
 }
+.invinvisible, .ui-slider, .inv2000, .inv400{
+	display: none;
+}

@@ -217,7 +217,7 @@ function doPlayPause()
 	paused = !paused;
 	if (paused)
 	{
-		playPauseBackButton.setAttribute("value", "Continuar con el árbol");
+		playPauseBackButton.setAttribute("value", "Reanudar");
 		if (skipBackButton.disabled == false)
 		{
 			stepBackButton.disabled = false;		
@@ -226,7 +226,7 @@ function doPlayPause()
 	}
 	else
 	{
-		playPauseBackButton.setAttribute("value", "Detenerlo momentaneamente");	
+		playPauseBackButton.setAttribute("value", "Pausar");	
 	}
 	animationManager.SetPaused(paused);
 }
@@ -238,6 +238,7 @@ function addControl(type, name, location) {
 	
     element.setAttribute("type", type);
     element.setAttribute("value", name);
+    element.setAttribute("id", name);
 
 	var tableEntry = document.createElement("td");
 	
@@ -262,6 +263,7 @@ function addControlToAnimationBar(type,name,containerType)
 	
     element.setAttribute("type", type);
     element.setAttribute("value", name);
+    element.setAttribute("class", "inv"+name);
 	
 	
 	var tableEntry = document.createElement("td");
@@ -283,15 +285,15 @@ function initCanvas()
 	objectManager = new ObjectManager();
 	animationManager = new AnimationManager(objectManager);
 	
-	skipBackButton = addControlToAnimationBar("Button", "");
+	skipBackButton = addControlToAnimationBar("Button", "invisible");
 	skipBackButton.onclick = animationManager.skipBack.bind(animationManager);
-	stepBackButton = addControlToAnimationBar("Button", "");
+	stepBackButton = addControlToAnimationBar("Button", "invisible");
 	stepBackButton.onclick = animationManager.stepBack.bind(animationManager);
-	playPauseBackButton = addControlToAnimationBar("Button", "Detenerlo momentaneamente");
+	playPauseBackButton = addControlToAnimationBar("Button", "Pausar");
 	playPauseBackButton.onclick = doPlayPause ;
-	stepForwardButton = addControlToAnimationBar("Button", "");
+	stepForwardButton = addControlToAnimationBar("Button", "invisible");
 	stepForwardButton.onclick = animationManager.step.bind(animationManager) ;
-	skipForwardButton = addControlToAnimationBar("Button", "");
+	skipForwardButton = addControlToAnimationBar("Button", "invisible");
 	skipForwardButton.onclick = animationManager.skipForward.bind(animationManager);
 	
 	
@@ -397,7 +399,7 @@ function initCanvas()
 	
 	
 	tableEntry = document.createElement("td");
-	txtNode = document.createTextNode("TAMAÑO DEL AREA 			Ancho:"); 
+	//txtNode = document.createTextNode("TAMAÑO DEL AREA 			Ancho:"); 
 	tableEntry.appendChild(txtNode);
 	controlBar.appendChild(tableEntry);
 
@@ -408,20 +410,20 @@ function initCanvas()
 
 	
 	tableEntry = document.createElement("td");
-	txtNode = document.createTextNode("       Altura:"); 
-	tableEntry.appendChild(txtNode);
+	//txtNode = document.createTextNode("       Altura:"); 
+	//tableEntry.appendChild(txtNode);
 	controlBar.appendChild(tableEntry);
 	
 	heightEntry = addControlToAnimationBar("Text", canvas.height);
 	heightEntry.onkeydown = this.returnSubmit(heightEntry, animationManager.changeSize.bind(animationManager), 4, true);
 
 	heightEntry.size = 4;
-	sizeButton = addControlToAnimationBar("Button", "");
+	sizeButton = addControlToAnimationBar("Button", "invisible");
 	
 	sizeButton.onclick = animationManager.changeSize.bind(animationManager) ;
 	
 
-        swapButton = addControlToAnimationBar("Button", "");
+        swapButton = addControlToAnimationBar("Button", "invisible");
         swapButton.onclick = swapControlDiv;	
 	
 	
