@@ -29,15 +29,15 @@ var AnimatedCircle = function(objectID, objectLabel)
 {
 	this.objectID = objectID;
 	this.label = objectLabel;
-	this.radius = 20;
-	this.thickness = 3;
+	this.radius = 25;
+	this.thickness = 20;
 	this.x = 0;
 	this.y = 0;
 	this.alpha = 1.0;
 	this.addedToScene = true;
-/*	this.foregroundColor  = '#007700';
-	this.backgroundColor  = '#EEFFEE';
- */
+	this.foregroundColor  = '#0033CC';
+	this.backgroundColor  = '#08BBC4';
+ 
 }
 
 AnimatedCircle.prototype = new AnimatedObject();
@@ -79,7 +79,7 @@ AnimatedCircle.prototype.draw = function(ctx)
 
 	if (this.highlighted)
 	{
-		ctx.fillStyle = "#ff0000";
+		ctx.fillStyle = "#FFFF00";
 		ctx.beginPath();
 		ctx.arc(this.x,this.y,this.radius + this.highlightDiff,0,Math.PI*2, true);
 		ctx.closePath();
@@ -96,7 +96,7 @@ AnimatedCircle.prototype.draw = function(ctx)
 	ctx.fill();
 	ctx.stroke();
 	ctx.textAlign = 'center';
-	ctx.font         = '10px sans-serif';
+	ctx.font         = '20px Comic Sans MS';
 	ctx.textBaseline   = 'middle'; 
 	ctx.lineWidth = 1;
 	ctx.fillStyle = this.foregroundColor;
