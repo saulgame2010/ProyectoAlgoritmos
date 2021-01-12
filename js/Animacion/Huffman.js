@@ -432,6 +432,7 @@ Huffman.PQ.prototype.percolateUp = function(i) {
     }
 }
 
+
 var currentAlg;
 
 function init() {

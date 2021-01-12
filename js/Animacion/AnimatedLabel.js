@@ -64,7 +64,7 @@ AnimatedLabel.prototype.draw = function(ctx)
 
 	
 	
-	ctx.font = '20px Comic Sans MS';
+	ctx.font = '20px Quicksand';
 	if (this.centering)
 	{
 		ctx.textAlign = 'center';

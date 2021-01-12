@@ -217,7 +217,7 @@ function doPlayPause()
 	paused = !paused;
 	if (paused)
 	{
-		playPauseBackButton.setAttribute("value", "play");
+		playPauseBackButton.setAttribute("value", "Continuar con el árbol");
 		if (skipBackButton.disabled == false)
 		{
 			stepBackButton.disabled = false;		
@@ -226,7 +226,7 @@ function doPlayPause()
 	}
 	else
 	{
-		playPauseBackButton.setAttribute("value", "pause");	
+		playPauseBackButton.setAttribute("value", "Detenerlo momentaneamente");	
 	}
 	animationManager.SetPaused(paused);
 }
@@ -283,15 +283,15 @@ function initCanvas()
 	objectManager = new ObjectManager();
 	animationManager = new AnimationManager(objectManager);
 	
-	skipBackButton = addControlToAnimationBar("Button", "Skip Back");
+	skipBackButton = addControlToAnimationBar("Button", "");
 	skipBackButton.onclick = animationManager.skipBack.bind(animationManager);
-	stepBackButton = addControlToAnimationBar("Button", "Step Back");
+	stepBackButton = addControlToAnimationBar("Button", "");
 	stepBackButton.onclick = animationManager.stepBack.bind(animationManager);
-	playPauseBackButton = addControlToAnimationBar("Button", "Pause");
+	playPauseBackButton = addControlToAnimationBar("Button", "Detenerlo momentaneamente");
 	playPauseBackButton.onclick = doPlayPause ;
-	stepForwardButton = addControlToAnimationBar("Button", "Step Forward");
+	stepForwardButton = addControlToAnimationBar("Button", "");
 	stepForwardButton.onclick = animationManager.step.bind(animationManager) ;
-	skipForwardButton = addControlToAnimationBar("Button", "Skip Forward");
+	skipForwardButton = addControlToAnimationBar("Button", "");
 	skipForwardButton.onclick = animationManager.skipForward.bind(animationManager);
 	
 	
@@ -320,7 +320,7 @@ function initCanvas()
 	midLevel = document.createElement("tr");
 	bottomLevel = document.createElement("td");
 	bottomLevel.align = "center";
-	var txtNode = document.createTextNode("Animation Speed"); 
+	var txtNode = document.createTextNode(""); 
 	midLevel.appendChild(bottomLevel);
 	bottomLevel.appendChild(txtNode);
 	newTable.appendChild(midLevel);	
@@ -397,7 +397,7 @@ function initCanvas()
 	
 	
 	tableEntry = document.createElement("td");
-	txtNode = document.createTextNode(" w:"); 
+	txtNode = document.createTextNode("TAMAÑO DEL AREA 			Ancho:"); 
 	tableEntry.appendChild(txtNode);
 	controlBar.appendChild(tableEntry);
 
@@ -408,7 +408,7 @@ function initCanvas()
 
 	
 	tableEntry = document.createElement("td");
-	txtNode = document.createTextNode("       h:"); 
+	txtNode = document.createTextNode("       Altura:"); 
 	tableEntry.appendChild(txtNode);
 	controlBar.appendChild(tableEntry);
 	
@@ -416,12 +416,12 @@ function initCanvas()
 	heightEntry.onkeydown = this.returnSubmit(heightEntry, animationManager.changeSize.bind(animationManager), 4, true);
 
 	heightEntry.size = 4;
-	sizeButton = addControlToAnimationBar("Button", "Change Canvas Size");
+	sizeButton = addControlToAnimationBar("Button", "");
 	
 	sizeButton.onclick = animationManager.changeSize.bind(animationManager) ;
 	
 
-        swapButton = addControlToAnimationBar("Button", "Move Controls");
+        swapButton = addControlToAnimationBar("Button", "");
         swapButton.onclick = swapControlDiv;	
 	
 	
