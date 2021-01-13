@@ -330,7 +330,7 @@ Huffman.prototype.build = function(text) {
     node = this.pq.removeMin();
     this.setNodeInPQ(node, false);
 
-    this.setStatus("Estado actual: Se ha terminado la codificación\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste algoritmo es de programación voras ya que busca optimizar la solución, es decir, buscar el \n\nárbol más sencillo posible");
+    this.setStatus("Estado actual: Se ha terminado la codificación\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste algoritmo es de programación voraz ya que busca optimizar la solución, es decir, buscar el \n\nárbol más sencillo posible");
     return this.commands;
 }
 
