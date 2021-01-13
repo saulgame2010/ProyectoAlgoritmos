@@ -166,7 +166,7 @@ function animEnded()
 	{
 		stepBackButton.disabled = false;		
 	}
-	objectManager.statusReport.setText(" ");
+	objectManager.statusReport.setText("");
 	objectManager.statusReport.setForegroundColor("#1DD9A8");
 }
 
