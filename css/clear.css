@@ -7,6 +7,9 @@ body{
 	background: #02457A;
 	transition: 700ms;	
 }
+#global{
+	transition: 700ms;
+}
 #menu ul li:hover{
 	background: #018ABE;
 	transition: 700ms;
