@@ -32,7 +32,7 @@ function AnimatedLabel(id, val, center, initialWidth)
 	this.objectID = id;
 	this.alpha = 1.0;
 	this.addedToScene = true;
-	this.labelColor = "#FF2C09";
+	this.labelColor = "#4B74F7";
 	this.textWidth = 0;
 	if (initialWidth != undefined)
 	{

@@ -79,7 +79,7 @@ AnimatedCircle.prototype.draw = function(ctx)
 
 	if (this.highlighted)
 	{
-		ctx.fillStyle = "#FFFF00";
+		ctx.fillStyle = "#85D4F7";
 		ctx.beginPath();
 		ctx.arc(this.x,this.y,this.radius + this.highlightDiff,0,Math.PI*2, true);
 		ctx.closePath();
