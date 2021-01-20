@@ -1,29 +1,3 @@
-// Copyright 2015 Yves Lucet, University of British Columbia Okanagan. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of British Columbia Okanagan.
-
 function Huffman(am, w, h) {
     this.init(am, w, h);
 }
@@ -31,7 +5,6 @@ function Huffman(am, w, h) {
 Huffman.prototype = new Algorithm();
 Huffman.prototype.constructor = Huffman;
 Huffman.superclass = Algorithm.prototype;
-
 Huffman.MARGIN_X = 40;
 Huffman.MARGIN_Y = 60;
 Huffman.STATUS_LABEL_X = 20;
@@ -40,10 +13,8 @@ Huffman.NODE_WIDTH = 25;
 Huffman.NODE_HEIGHT = 25;
 Huffman.NODE_SPACING_X = 30;
 Huffman.NODE_SPACING_Y = 35;
-
 Huffman.NORMAL_FG_COLOR = "#000";
 Huffman.ROOT_FG_COLOR = "#00f";
-
 Huffman.cmpByFreq = function(node1, node2) {
     return node1.freq - node2.freq;
 }
@@ -56,15 +27,12 @@ Huffman.prototype.init = function(am, w, h) {
 
 Huffman.prototype.addControls = function() {
     this.controls = [];
-
     this.btnReset = addControlToAlgorithmBar("Button", "Reiniciar animación");
     this.btnReset.onclick = this.reset.bind(this);
     this.controls.push(this.btnReset);
-
     this.btnBuild = addControlToAlgorithmBar("Button", "Dibujar árbol");
     this.btnBuild.onclick = this.buildWrapper.bind(this);
     this.controls.push(this.btnBuild);
-
     this.lblText = addLabelToAlgorithmBar("Ingresa el texto que desea codificar:");
     this.txtText = addControlToAlgorithmBar("Text", "");
     this.controls.push(this.txtText);
@@ -87,38 +55,32 @@ Huffman.prototype.setEnabled = function(b) {
 Huffman.prototype.reset = function() {
     var i, ch, freqs;
     var text = this.txtText.value;
-
     this.nextId = 0;
-
     this.animationManager.resetAll();
     this.clearHistory();
-
     this.commands = [];
-
     this.statusId = this.newId();
     this.cmd(
         "CreateLabel", this.statusId, "Estado actual: Esperando texto...", Huffman.STATUS_LABEL_X, Huffman.STATUS_LABEL_Y, 0);
 
-    // Calculate the frequencies of the characters in the input.
+    // Se calcula la frecuenia de cada caracter del texto ingresado
     freqs = {};
     for (i = 0; i < text.length; ++i) {
         ch = text[i];
         freqs[ch] = 1 + (freqs[ch] !== undefined ? freqs[ch] : 0)
     }
 
-    // Create a singleton tree for each node.
+    //Se crea el nodo (dentro del arbol)
     this.roots = [];
     Object.keys(freqs).sort().forEach(function(c, i) {
         this.roots.push(this.newLeafNode(c, freqs[c], i));
     }, this);
     this.pq = new Huffman.PQ(this.roots, Huffman.cmpByFreq);
-
     this.redrawTree();
-
     this.animationManager.StartNewAnimation(this.commands);
 }
 
-// Allocates a new graphics ID.
+
 Huffman.prototype.newId = function() {
     return this.nextId++;
 }
@@ -131,8 +93,6 @@ Huffman.prototype.newLeafNode = function(value, freq, rootIndex) {
         child1: undefined,
         child2: undefined,
         rootIndex: rootIndex,
-
-        // Visualization properties.
         id: undefined,
         width: Huffman.NODE_WIDTH,
         x: undefined,
@@ -149,8 +109,6 @@ Huffman.prototype.newParentNode = function(child1, child2, rootIndex) {
         child1: child1,
         child2: child2,
         rootIndex: rootIndex,
-
-        // Visualization properties.
         id: undefined,
         width: child1.width + Huffman.NODE_SPACING_X + child2.width,
         x: undefined,
@@ -163,7 +121,6 @@ Huffman.prototype.newParentNode = function(child1, child2, rootIndex) {
     }
     child1.parent = node;
     child2.parent = node;
-
     return node;
 }
 
@@ -181,13 +138,10 @@ Huffman.prototype.setNodeInPQ = function(node, inPQ) {
         node.inPQ ? Huffman.ROOT_FG_COLOR : Huffman.NORMAL_FG_COLOR);
 }
 
-// Sets the text displayed in the status label.
 Huffman.prototype.setStatus = function(msg) {
     this.cmd("SetText", this.statusId, msg);
 }
 
-// Performs all the steps to update the visualization based on the current
-// state.
 Huffman.prototype.redrawTree = function() {
     var i;
     this.repositionTree();
@@ -196,13 +150,11 @@ Huffman.prototype.redrawTree = function() {
     }
 }
 
-// Calculates positions for all of the nodes in the tree, using their
-// already-calculated widths.
+
 Huffman.prototype.repositionTree = function() {
     var x = Huffman.MARGIN_X + Huffman.NODE_WIDTH / 2;
     var y = Huffman.MARGIN_Y + Huffman.NODE_HEIGHT / 2;
     var i, root;
-
     for (i = 0; i < this.roots.length; ++i) {
         root = this.roots[i];
         root.x = x + root.width / 2;
@@ -212,9 +164,6 @@ Huffman.prototype.repositionTree = function() {
     }
 }
 
-// Calculates positions for all of the children underneath the node, based on
-// the node's position, using their already-calculated widths.  Centers the
-// children underneath the node.
 Huffman.prototype.repositionChildren = function(node) {
     var x = node.x - node.width / 2;
     var y = node.y + Huffman.NODE_SPACING_Y + Huffman.NODE_HEIGHT;
@@ -229,8 +178,6 @@ Huffman.prototype.repositionChildren = function(node) {
     }
 }
 
-// Applies the positions of the given node and all of its descendents to the
-// visualization.
 Huffman.prototype.realizePositions = function(node) {
     var children = this.getChildren(node);
     var i, label;
@@ -252,15 +199,12 @@ Huffman.prototype.realizePositions = function(node) {
     }
 }
 
-// Joins the two trees with the given roots under a new root node that is
-// returned.  Updates the visualization.
+//Aqui se unen los dos sub arboles y se actualiza el nodo padre
 Huffman.prototype.union = function(node1, node2) {
     var i, nodeTmp, newRoot;
     if (node1.rootIndex === undefined || node2.rootIndex === undefined) {
         throw new Error("union: Ambos nodos deben tener índices de nodo raíz.");
     }
-
-    // For visual consistency, always merge the right node into the left.
     if (node1.rootIndex > node2.rootIndex) {
         nodeTmp = node1;
         node1 = node2;
@@ -275,11 +219,9 @@ Huffman.prototype.union = function(node1, node2) {
     }
     node1.rootIndex = undefined;
     node2.rootIndex = undefined;
-
     this.redrawTree();
     this.cmd("Connect", newRoot.id, node1.id);
     this.cmd("Connect", newRoot.id, node2.id);
-
     return newRoot;
 }
 
@@ -291,13 +233,11 @@ Huffman.prototype.buildWrapper = function(event) {
     this.implementAction(this.build.bind(this), this.txtText.value);
 }
 
-// Animates the construction of a Huffman code for the given text.
+// Animacion que contruye el arbol por medio de la codificacion de Huffman
 Huffman.prototype.build = function(text) {
     var node, child1, child2;
-
     this.commands = [];
     this.cmd("Step");
-
     while (this.pq.size() > 1) {
         this.setStatus("Estado actual: Eliminando dos elementos mínimos de la cola de prioridad.");
         this.cmd("Step");
@@ -308,7 +248,6 @@ Huffman.prototype.build = function(text) {
         this.cmd("SetHighlight", child1.id, 1);
         this.cmd("SetHighlight", child2.id, 1);
         this.cmd("Step");
-
         this.setStatus("Estado actual: Fusionando los dos sub árboles.");
         this.cmd("Step");
         this.cmd("SetHighlight", child1.id, 0);
@@ -316,7 +255,6 @@ Huffman.prototype.build = function(text) {
         node = this.union(child1, child2);
         this.cmd("SetHighlight", node.id, 1);
         this.cmd("Step");
-
         this.setStatus("Estado actual: Reinsertando el nuevo nodo raíz en la cola de prioridad.");
         this.cmd("Step");
         this.pq.insert(node);
@@ -325,40 +263,30 @@ Huffman.prototype.build = function(text) {
         this.cmd("Step");
     }
 
-    // Finally, remove the last entry from the priority queue so that it doesn't
-    // stay coloured.
     node = this.pq.removeMin();
     this.setNodeInPQ(node, false);
-
     this.setStatus("Estado actual: Se ha terminado la codificación\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste algoritmo es de programación voraz ya que busca optimizar la solución, es decir, buscar el \n\nárbol más sencillo posible");
     return this.commands;
 }
 
-// Simple priority queue implementation using a min heap.
 Huffman.PQ = function(elements, comparator) {
     var i;
-
     this.comparator = comparator;
-
-    // Create a heap via bottom-up construction.
     this.elements = elements.slice();
     for (i = this.elements.length - 1; i >= 0; --i) {
         this.percolateDown(i);
     }
 }
 
-// Returns the number of elements in the queue.
 Huffman.PQ.prototype.size = function() {
     return this.elements.length;
 }
 
-// Inserts an element into the queue.
 Huffman.PQ.prototype.insert = function(element) {
     this.elements.push(element);
     this.percolateUp(this.elements.length - 1);
 }
 
-// Removes the minimum element from the queue and returns it.
 Huffman.PQ.prototype.removeMin = function() {
     var minElement = this.elements[0];
     this.swap(0, this.elements.length - 1);
@@ -367,14 +295,10 @@ Huffman.PQ.prototype.removeMin = function() {
     return minElement;
 }
 
-// Returns the index of the parent of a node, or undefined when given the root.
 Huffman.PQ.prototype.getParent = function(i) {
-    // Avoiding ending up with floating-point numbers here.
     return i === 0 ? undefined : (i - ((i & 1) == 1 ? 1 : 2)) / 2;
 }
 
-// Returns the index of the child node with the smaller key, or undefined the
-// node has no children.
 Huffman.PQ.prototype.findMinChild = function(i) {
     var j = i * 2 + 1;  // Left child index.
     if (j >= this.elements.length) {
@@ -392,15 +316,12 @@ Huffman.PQ.prototype.findMinChild = function(i) {
     }
 }
 
-// Swaps two positions in the heap.
 Huffman.PQ.prototype.swap = function(i, j) {
     var x = this.elements[i];
     this.elements[i] = this.elements[j];
     this.elements[j] = x;
 }
 
-// Moves an element down the heap until it's less than or equal to all of its
-// children.
 Huffman.PQ.prototype.percolateDown = function(i) {
     var j;
     while (true) {
@@ -416,7 +337,6 @@ Huffman.PQ.prototype.percolateDown = function(i) {
     }
 }
 
-// Moves an element up the heap until it's greater than or equal to its parent.
 Huffman.PQ.prototype.percolateUp = function(i) {
     var j;
     while (true) {
@@ -432,9 +352,7 @@ Huffman.PQ.prototype.percolateUp = function(i) {
     }
 }
 
-
 var currentAlg;
-
 function init() {
     var animManag = initCanvas();
     currentAlg = new Huffman(animManag, canvas.width, canvas.height);
