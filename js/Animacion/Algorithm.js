@@ -55,6 +55,7 @@ function addControlToAlgorithmBar(type, name) {
     element.setAttribute("type", type);
     element.setAttribute("value", name);
     element.setAttribute("name", name);
+    element.setAttribute("id", name);
 	var tableEntry = document.createElement("td");
 	tableEntry.appendChild(element);
     var controlBar = document.getElementById("AlgorithmSpecificControls");
