@@ -356,4 +356,8 @@ var currentAlg;
 function init() {
     var animManag = initCanvas();
     currentAlg = new Huffman(animManag, canvas.width, canvas.height);
+    var button = document.getElementById("Dibujar árbol");
+    button.addEventListener("click", function() {
+        recogerTxt();
+    });
 }
