@@ -38,6 +38,7 @@ Huffman.prototype.addControls = function() {
     this.controls.push(this.btnCodif);
     this.lblText = addLabelToAlgorithmBar("Ingresa el texto que desea codificar:");
     this.txtText = addControlToAlgorithmBar("Text", "ingresaTxt");
+    this.txtText.setAttribute("value", "");
     this.controls.push(this.txtText);
 }
 
