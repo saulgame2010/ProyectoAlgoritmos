@@ -33,6 +33,9 @@ Huffman.prototype.addControls = function() {
     this.btnBuild = addControlToAlgorithmBar("Button", "Dibujar árbol");
     this.btnBuild.onclick = this.buildWrapper.bind(this);
     this.controls.push(this.btnBuild);
+    this.btnCodif = addControlToAlgorithmBar("Button", "Ver codificación");
+    this.btnBuild.onclick = this.buildWrapper.bind(this);
+    this.controls.push(this.btnCodif);
     this.lblText = addLabelToAlgorithmBar("Ingresa el texto que desea codificar:");
     this.txtText = addControlToAlgorithmBar("Text", "ingresaTxt");
     this.controls.push(this.txtText);
@@ -69,7 +72,7 @@ Huffman.prototype.reset = function() {
         ch = text[i];
         freqs[ch] = 1 + (freqs[ch] !== undefined ? freqs[ch] : 0)
     }
-
+    console.log("soy freqs "+freqs);
     //Se crea el nodo (dentro del arbol)
     this.roots = [];
     Object.keys(freqs).sort().forEach(function(c, i) {
@@ -356,7 +359,7 @@ var currentAlg;
 function init() {
     var animManag = initCanvas();
     currentAlg = new Huffman(animManag, canvas.width, canvas.height);
-    var button = document.getElementById("Dibujar árbol");
+    var button = document.getElementById("Ver codificación");
     button.addEventListener("click", function() {
         recogerTxt();
     });

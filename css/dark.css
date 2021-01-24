@@ -80,3 +80,8 @@ video:focus{
     border:1px solid #97CADB;
     box-shadow: 0 0 10px #97CADB;
 }
+#box h2{
+	color: white;
+	transition: 700ms;
+	text-transform: uppercase;
+}

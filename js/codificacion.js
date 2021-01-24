@@ -65,9 +65,7 @@ function recogerTxt() {
 	      }
 	    }
 	    console.log(prob);
-	    Object.keys(prob).sort(function(a, b) {
-	      return ~~(Math.random() * 2);
-	    }).forEach(function(e) {
+	    Object.keys(prob).sort().forEach(function(e) {
 	      tree.push([prob[e], e]);
 	    });
 	    while (tree.length > 1) {
@@ -90,10 +88,11 @@ function recogerTxt() {
 	    for (var i = 0; i < data.length; i++) {
 	      result += dict[data.charAt(i)];
 	    }
+	    console.log(dict);
 	    var header = Object.keys(dict).map(function(e) {
 	      return e.charCodeAt(0) + '|' + dict[e];
 	    }).join('-') + '';
-	    return result;
+	    return "La codificación es:\n"+JSON.stringify(dict);
 	  },
 	  decode: function(string) {
 	    string = string.split('/');
@@ -121,7 +120,7 @@ function recogerTxt() {
 	
 	var enc = Huffman.encode(document.getElementById("ingresaTxt").value);
 	//log(enc);
-	alert(enc);
+	swal("Codificación", enc, "success");
 	var dec = Huffman.decode(enc);
 	//log(dec);
 	//alert(dec);
